@@ -37,7 +37,7 @@ function App() {
     useLogger(MoviesReducer),
     initState
   );
-
+console.log(process.env)
   const fetchMovies = async (endpoint) => {
     try {
       const result = await (await fetch(endpoint)).json();

@@ -7,9 +7,6 @@ import Home from "./components/Home";
 import {
   API_KEY,
   API_URL,
-  POSTER_SIZE,
-  BACKDROP_SIZE,
-  IMAGE_BASE_URL,
 } from "./config";
 import { useLogger } from "./utils/logger";
 
@@ -17,13 +14,14 @@ export const MoiveContext = React.createContext();
 const initState = {
   movies: {},
   loading: true,
-  error: "",
+  headerImage: {},
+  error: ""
 };
 
 const MoviesReducer = (state, action) => {
   switch (action.type) {
     case "FETCH_SUCCESS":
-      return { ...state, movies: action.payload, loading: false };
+      return { ...state, movies: action.payload,headerImage: action.headerImage , loading: false };
 
     case "FETCH_ERR":
       return { loading: false, error: action.error };
@@ -34,14 +32,14 @@ const MoviesReducer = (state, action) => {
 };
 function App() {
   const [movieState, dispatch] = useReducer(
-    useLogger(MoviesReducer),
+    MoviesReducer,
     initState
   );
 console.log(process.env)
   const fetchMovies = async (endpoint) => {
     try {
       const result = await (await fetch(endpoint)).json();
-      dispatch({ type: "FETCH_SUCCESS", payload: result });
+      dispatch({ type: "FETCH_SUCCESS", payload: result,headerImage: result.results[0] });
     } catch (error) {
       dispatch({ type: "FETCH_ERR", error: error });
     }
@@ -50,10 +48,8 @@ console.log(process.env)
     fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`);
   }, []);
   return (
-    <MoiveContext.Provider value={{ movieState, movieDispath: dispatch }}>
-      <div className="App">
+    <MoiveContext.Provider value={{ movieState: movieState, movieDispath: dispatch }}>
         <Home />
-      </div>
     </MoiveContext.Provider>
   );
 }

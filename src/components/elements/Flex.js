@@ -1,7 +1,7 @@
 import React from "react";
-import { StyledGrid } from '../styles/StyledGrid'
+import { StyledFlex } from '../styles/StyledFlex'
 const Grid = ({ children }) => {
-  return <StyledGrid>{children}</StyledGrid>;
+  return <StyledFlex>{children}</StyledFlex>;
 };
 
 export default Grid;

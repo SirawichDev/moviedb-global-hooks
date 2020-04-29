@@ -1,18 +1,14 @@
 import React, { useReducer, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Header from "./components/elements/Header";
-import { MovieProvider } from "./moviesApiContext";
 import Home from "./components/Home";
 import {
   API_KEY,
   API_URL,
 } from "./config";
-import { useLogger } from "./utils/logger";
 
 export const MoiveContext = React.createContext();
 const initState = {
-  movies: {},
+  movies: [{}],
   loading: true,
   headerImage: {},
   error: ""
@@ -35,11 +31,10 @@ function App() {
     MoviesReducer,
     initState
   );
-console.log(process.env)
   const fetchMovies = async (endpoint) => {
     try {
       const result = await (await fetch(endpoint)).json();
-      dispatch({ type: "FETCH_SUCCESS", payload: result,headerImage: result.results[0] });
+      dispatch({ type: "FETCH_SUCCESS", payload: [...result.results],headerImage: result.results[0] });
     } catch (error) {
       dispatch({ type: "FETCH_ERR", error: error });
     }

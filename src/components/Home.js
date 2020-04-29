@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { MoiveContext } from "../App";
 import Header from "./elements/Header";
 import Spinner from "./elements/Spinner";
-import Grid from "./elements/Grid";
+import Flex from "./elements/Flex";
 import MovieThumb from "./elements/MovieThumb";
 import HeaderImage from "./elements/HeaderImage";
 import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from "../config";
@@ -23,7 +23,7 @@ const Home = () => {
         title={headerImage.original_title}
         text={headerImage.overview}
       />
-      <Grid header={searchTerm ? "Search Result" : "Popular Movies"}>
+      <Flex header={searchTerm ? "Search Result" : "Popular Movies"}>
         {movieContext.movieState.movies.map((movie) => (
           <MovieThumb
             key={movie.id}
@@ -37,7 +37,7 @@ const Home = () => {
             clickable
           />
         ))}
-      </Grid>
+      </Flex>
       <Spinner />
       <GlobalStyle />
     </>

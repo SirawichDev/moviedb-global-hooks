@@ -1,7 +1,7 @@
 import React from "react";
 import { StyledFlex } from '../styles/StyledFlex'
-const Grid = ({ children }) => {
+const Flex = ({ children }) => {
   return <StyledFlex>{children}</StyledFlex>;
 };
 
-export default Grid;
+export default Flex;

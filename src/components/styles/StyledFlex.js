@@ -1,9 +1,10 @@
-import styled from 'styled-components'
-
-
+import styled from "styled-components";
 
 export const StyledFlex = styled.div`
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-`
+  max-width: 1280px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+`;
